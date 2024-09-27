@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="QLBDModelStoreContainer" CdmEntityContainer="QLBDEntities">
+    <EntitySetMapping Name="CT_TranDau">
+      <EntityTypeMapping TypeName="QLBDModel.CT_TranDau">
+        <MappingFragment StoreEntitySet="CT_TranDau">
+          <ScalarProperty Name="MaTD" ColumnName="MaTD" />
+          <ScalarProperty Name="MaDoi" ColumnName="MaDoi" />
+          <ScalarProperty Name="SoBanThang" ColumnName="SoBanThang" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Dois">
+      <EntityTypeMapping TypeName="QLBDModel.Doi">
+        <MappingFragment StoreEntitySet="Doi">
+          <ScalarProperty Name="MaDoi" ColumnName="MaDoi" />
+          <ScalarProperty Name="TenDoi" ColumnName="TenDoi" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sans">
+      <EntityTypeMapping TypeName="QLBDModel.San">
+        <MappingFragment StoreEntitySet="San">
+          <ScalarProperty Name="MaSan" ColumnName="MaSan" />
+          <ScalarProperty Name="TenSan" ColumnName="TenSan" />
+          <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TranDaus">
+      <EntityTypeMapping TypeName="QLBDModel.TranDau">
+        <MappingFragment StoreEntitySet="TranDau">
+          <ScalarProperty Name="MaTD" ColumnName="MaTD" />
+          <ScalarProperty Name="MaSan" ColumnName="MaSan" />
+          <ScalarProperty Name="Ngay" ColumnName="Ngay" />
+          <ScalarProperty Name="Gio" ColumnName="Gio" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

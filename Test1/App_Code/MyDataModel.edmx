@@ -1,0 +1,222 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="QLBDModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CT_TranDau">
+          <Key>
+            <PropertyRef Name="MaTD" />
+          </Key>
+          <Property Name="MaTD" Type="char" MaxLength="2" Nullable="false" />
+          <Property Name="MaDoi" Type="char" MaxLength="3" />
+          <Property Name="SoBanThang" Type="int" />
+        </EntityType>
+        <EntityType Name="Doi">
+          <Key>
+            <PropertyRef Name="MaDoi" />
+          </Key>
+          <Property Name="MaDoi" Type="char" MaxLength="3" Nullable="false" />
+          <Property Name="TenDoi" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="San">
+          <Key>
+            <PropertyRef Name="MaSan" />
+          </Key>
+          <Property Name="MaSan" Type="char" MaxLength="3" Nullable="false" />
+          <Property Name="TenSan" Type="varchar" MaxLength="100" />
+          <Property Name="DiaChi" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="TranDau">
+          <Key>
+            <PropertyRef Name="MaTD" />
+          </Key>
+          <Property Name="MaTD" Type="char" MaxLength="2" Nullable="false" />
+          <Property Name="MaSan" Type="char" MaxLength="3" />
+          <Property Name="Ngay" Type="date" />
+          <Property Name="Gio" Type="time" Precision="7" />
+        </EntityType>
+        <Association Name="FK__CT_TranDa__SoBan__3F466844">
+          <End Role="Doi" Type="Self.Doi" Multiplicity="0..1" />
+          <End Role="CT_TranDau" Type="Self.CT_TranDau" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doi">
+              <PropertyRef Name="MaDoi" />
+            </Principal>
+            <Dependent Role="CT_TranDau">
+              <PropertyRef Name="MaDoi" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TranDau__MaSan__3B75D760">
+          <End Role="San" Type="Self.San" Multiplicity="0..1" />
+          <End Role="TranDau" Type="Self.TranDau" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="San">
+              <PropertyRef Name="MaSan" />
+            </Principal>
+            <Dependent Role="TranDau">
+              <PropertyRef Name="MaSan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="QLBDModelStoreContainer">
+          <EntitySet Name="CT_TranDau" EntityType="Self.CT_TranDau" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Doi" EntityType="Self.Doi" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="San" EntityType="Self.San" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TranDau" EntityType="Self.TranDau" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__CT_TranDa__SoBan__3F466844" Association="Self.FK__CT_TranDa__SoBan__3F466844">
+            <End Role="Doi" EntitySet="Doi" />
+            <End Role="CT_TranDau" EntitySet="CT_TranDau" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TranDau__MaSan__3B75D760" Association="Self.FK__TranDau__MaSan__3B75D760">
+            <End Role="San" EntitySet="San" />
+            <End Role="TranDau" EntitySet="TranDau" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="QLBDModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CT_TranDau">
+          <Key>
+            <PropertyRef Name="MaTD" />
+          </Key>
+          <Property Name="MaTD" Type="String" MaxLength="2" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="MaDoi" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
+          <Property Name="SoBanThang" Type="Int32" />
+          <NavigationProperty Name="Doi" Relationship="Self.FK__CT_TranDa__SoBan__3F466844" FromRole="CT_TranDau" ToRole="Doi" />
+        </EntityType>
+        <EntityType Name="Doi">
+          <Key>
+            <PropertyRef Name="MaDoi" />
+          </Key>
+          <Property Name="MaDoi" Type="String" MaxLength="3" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="TenDoi" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CT_TranDau" Relationship="Self.FK__CT_TranDa__SoBan__3F466844" FromRole="Doi" ToRole="CT_TranDau" />
+        </EntityType>
+        <EntityType Name="San">
+          <Key>
+            <PropertyRef Name="MaSan" />
+          </Key>
+          <Property Name="MaSan" Type="String" MaxLength="3" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="TenSan" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="DiaChi" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TranDaus" Relationship="Self.FK__TranDau__MaSan__3B75D760" FromRole="San" ToRole="TranDau" />
+        </EntityType>
+        <EntityType Name="TranDau">
+          <Key>
+            <PropertyRef Name="MaTD" />
+          </Key>
+          <Property Name="MaTD" Type="String" MaxLength="2" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="MaSan" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
+          <Property Name="Ngay" Type="DateTime" Precision="0" />
+          <Property Name="Gio" Type="Time" Precision="7" />
+          <NavigationProperty Name="San" Relationship="Self.FK__TranDau__MaSan__3B75D760" FromRole="TranDau" ToRole="San" />
+        </EntityType>
+        <Association Name="FK__CT_TranDa__SoBan__3F466844">
+          <End Role="Doi" Type="Self.Doi" Multiplicity="0..1" />
+          <End Role="CT_TranDau" Type="Self.CT_TranDau" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doi">
+              <PropertyRef Name="MaDoi" />
+            </Principal>
+            <Dependent Role="CT_TranDau">
+              <PropertyRef Name="MaDoi" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TranDau__MaSan__3B75D760">
+          <End Role="San" Type="Self.San" Multiplicity="0..1" />
+          <End Role="TranDau" Type="Self.TranDau" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="San">
+              <PropertyRef Name="MaSan" />
+            </Principal>
+            <Dependent Role="TranDau">
+              <PropertyRef Name="MaSan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="QLBDEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CT_TranDau" EntityType="Self.CT_TranDau" />
+          <EntitySet Name="Dois" EntityType="Self.Doi" />
+          <EntitySet Name="Sans" EntityType="Self.San" />
+          <EntitySet Name="TranDaus" EntityType="Self.TranDau" />
+          <AssociationSet Name="FK__CT_TranDa__SoBan__3F466844" Association="Self.FK__CT_TranDa__SoBan__3F466844">
+            <End Role="Doi" EntitySet="Dois" />
+            <End Role="CT_TranDau" EntitySet="CT_TranDau" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TranDau__MaSan__3B75D760" Association="Self.FK__TranDau__MaSan__3B75D760">
+            <End Role="San" EntitySet="Sans" />
+            <End Role="TranDau" EntitySet="TranDaus" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="QLBDModelStoreContainer" CdmEntityContainer="QLBDEntities">
+          <EntitySetMapping Name="CT_TranDau">
+            <EntityTypeMapping TypeName="QLBDModel.CT_TranDau">
+              <MappingFragment StoreEntitySet="CT_TranDau">
+                <ScalarProperty Name="MaTD" ColumnName="MaTD" />
+                <ScalarProperty Name="MaDoi" ColumnName="MaDoi" />
+                <ScalarProperty Name="SoBanThang" ColumnName="SoBanThang" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Dois">
+            <EntityTypeMapping TypeName="QLBDModel.Doi">
+              <MappingFragment StoreEntitySet="Doi">
+                <ScalarProperty Name="MaDoi" ColumnName="MaDoi" />
+                <ScalarProperty Name="TenDoi" ColumnName="TenDoi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sans">
+            <EntityTypeMapping TypeName="QLBDModel.San">
+              <MappingFragment StoreEntitySet="San">
+                <ScalarProperty Name="MaSan" ColumnName="MaSan" />
+                <ScalarProperty Name="TenSan" ColumnName="TenSan" />
+                <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TranDaus">
+            <EntityTypeMapping TypeName="QLBDModel.TranDau">
+              <MappingFragment StoreEntitySet="TranDau">
+                <ScalarProperty Name="MaTD" ColumnName="MaTD" />
+                <ScalarProperty Name="MaSan" ColumnName="MaSan" />
+                <ScalarProperty Name="Ngay" ColumnName="Ngay" />
+                <ScalarProperty Name="Gio" ColumnName="Gio" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
